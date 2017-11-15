@@ -6,6 +6,7 @@ Requirements--
 Run--
 	cd "to the project folder"
 	nodejs chatServer.js
+	browser : localhost:8000
 
 Instructions--
 	1. on the home page click on "HEX"
