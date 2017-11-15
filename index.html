@@ -2,9 +2,10 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="chatStyle.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -12,137 +13,14 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Audiowide|Press+Start+2P|Special+Elite" rel="stylesheet">
-<style>
-	.sendMessageStyle {
-	    max-width: 70%; 
-	    clear:both;
-	    word-wrap: break-word;
-	    font-size: 1em;
-	    margin:0.5em;
-	    font-family: 'Ubuntu', sans-serif;
-	    float:right;
-	    color:white;
-	    background-color: rgba(64,60,56,0.6);
-	    border-width: 0 5px 0 0;
-	    border-style: solid;
-	    border-radius: 3px;
-	    border-color: transparent #ff4040 transparent transparent ;
-	}
 
-	.serverMessageStyle{
-		width: 70%; 
-	    word-wrap: break-word;
-	    font-size: 0.2em;
-	    clear:both;
-	    margin:0.5em;
-	    font-family: 'Press Start 2P', cursive;
-	    float:left;
-	    color:#99cc33;
-	    background-color: rgba(255,153,0,0.4);
-	    border-width: 0 0 0 5px;
-	    border-style: solid;
-	    border-radius: 3px;
-	    border-color: transparent transparent transparent #ffad60;
-	}
-	
-	.receiveMessageStyle {
-	    width: 70%; 
-	    word-wrap: break-word;
-	    font-size: 1em;
-	    margin:0.5em;
-	    clear:both;
-	    font-family: 'Ubuntu', sans-serif;
-	    float:left;
-	    color:white;
-	    background-color: rgba(25,25,23,0.6);
-	    border-width: 0 0 0 5px;
-	    border-style: solid;
-	    border-radius: 3px;
-	    border-color: transparent transparent transparent #ffad60;
-	}
-
-
-
-	.noBorder{
-		border:0px;
-		opacity:0.5;
-	}
-
-	.fullHeightDiv{
-		height: 100vh;
-		background-color: rgba(0,0,0,0.6);
-	}
-
-	.headingStyle{
-		text-align:right;
-		color:white;
-		font-family: 'Audiowide', cursive;
-	}
-
-	.subHeadingStyle{
-		text-align:center;
-		color:white;
-		margin-top:4em;
-	}
-
-	.subHeadings{
-		margin-bottom:0.4em;
-		padding: 0.3em;
-		font-family: 'Special Elite', cursive;
-		font-size:1.4em;
-		cursor:pointer;
-	}
-	.onlineUsers{
-		text-align:right;
-		margin-top:0.7em;
-		font-family: 'Press Start 2P', cursive;
-	}
-
-	body {
-	    background-image: url("back.jpg");
-	}
-
-	#changeName{
-		text-align:left;
-		color:white;
-		font-family: 'Audiowide', cursive;
-		cursor:pointer;
-	}
-
-	.area{
-		background:rgba(0,102,204);
-		background: -webkit-linear-gradient(right,rgba(0,102,204,0.9),rgba(0,102,204,0)); /*Safari 5.1-6*/
-		background: -o-linear-gradient(right,rgba(0,102,204,0.9),rgba(0,102,204,0)); /*Opera 11.1-12*/
-		background: -moz-linear-gradient(right,rgba(0,102,204,0.9),rgba(0,102,204,0)); /*Fx 3.6-15*/
-		background: linear-gradient(to right,rgba(0,102,204,0.9) , rgba(0,102,204,0));
-		height: 100vh;
-	}
-
-	.active{
-		color:#4e4845;  
-	}
-
-	::-webkit-scrollbar
-{
-  width: 0.6em;  /* for vertical scrollbars */
-  height: 0.3em; /* for horizontal scrollbars */
-}
-
-::-webkit-scrollbar-track
-{
-  background: transparent;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb
-{
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-}
-
-</style>
 </head>
 <body onunload="socket.disconnect();">
+	<div id="messageFromServer" class="serverMessageStyle" style="display:none;">
+		<h4 id="messageFromServerHeading" style="text-align:center;">
+			HELLO
+		</h4>
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-3 col-sm-2 col-xs-2 fullHeightDiv">
@@ -185,141 +63,20 @@
 			</div>
 		</div>
 	</div>
-	<audio id="mysoundclip" preload="auto">
-    	<source src="just-like-magic.mp3"></source>
+	<audio id="receiveSound" type="audio/mp3">
+    	<source src="Coin Obtained.wav"></source>
+	</audio>
+	<audio id="serverSound" type="audio/mp3">
+    	<source src="Pipe Maze.wav"></source>
 	</audio>
 </body>
 
 <script>
 
-var audio = $("#mysoundclip")[0];
+$( window ).on( "load", function() {
+	$.getScript("chatScript.js");
+});
 
-var socket=io.connect();
-var id=0;
-	$('#changeName').click(function(){
-		socket.emit('register',{
-			name:$('#from').html()
-		});
-		$("#send").css("display","block");
-	});
-
-
-
-	$('#send').click(function(e){
-		e.preventDefault();
-		id+=1;
-		createDiv({message:$('#message').val(),to:$('#to').html()},"sendMessageStyle",$("#from").html()+"_"+id,'s');
-		socket.emit('send',{
-			to:$("#to").html(),
-			from:$("#from").html(),
-			message:$('#message').val(),
-			id:$("#from").html()+"_"+id
-		},function(error,message){
-			console.log("error is :"+error);
-			console.log("message is: "+message);
-		});
-		$('#message').val("");
-		executeQuery();
-	});
-
-	socket.on('receive',function(data){
-		for(i in data){
-			//console.log(data[i]);
-			createDiv(data[i],"receiveMessageStyle",data[i].id,'r');
-			socket.emit('ack',{
-				to:data[i].from,
-				from:data[i].to,
-				id:data[i].id
-			});
-		}
-			audio.play();
-	});
-
-	socket.on('signal',function(data){
-		//console.log(data);
-		$("#"+data.id).css("border-color","transparent #5cb85c transparent transparent");
-	});
-
-	$("#message").on('change textInput input keystrokes',function(){
-		socket.emit('postStatus',{
-			to:$("#to").html(),
-			from:$("#from").html(),
-			typing:true
-		});
-	});
-
-	function executeQuery() {
-		socket.emit('postStatus',{
-			to:$("#to").html(),
-			from:$("#from").html(),
-			typing:false
-		});
-		setTimeout(executeQuery, 5000); // you could choose not to continue on failure...
-	}
-	executeQuery();
-
-	socket.on('getStatus',function(data){
-		if(data.typing==true)
-			$("#typing").html(data.from+" is typing");
-		else{
-			$("#typing").html("");
-		}
-	});
-
-	socket.on('getOnlineUsers',function(data){
-		$("#onlineUsers").html("");
-		for(i in data){
-			var h5 = document.createElement('h5');
-			h5.className="onlineUsers";
-			var node = document.createTextNode(data[i]);
-			h5.appendChild(node);
-			h5.style.cursor='pointer';
-			$(h5).click(function(){
-				$("#to").html($(this).html());
-				$(".onlineUsers").css("color","white");
-				$(this).css("color","#99cc33");
-			})
-			document.getElementById("onlineUsers").appendChild(h5);
-		}
-
-	});
-
-	socket.on('messageFromServer',function(data){
-		//console.log(data);
-		createDiv(data,"serverMessageStyle");
-	});
-
-	$("#reset").click(function(){
-		socket.disconnect();
-		window.location.href="/index.html";
-	});
-
-	function createDiv(data,cl,id,flag){
-		var Div_1 = document.createElement('div');
-		Div_1.className = cl;
-		Div_1.id=id;
-		var para=document.createElement('h5');
-		if(flag=='r')
-			para.innerHTML="<span style='color:#6497b1;'></b>"+data.from+": </b></span>"+data.message;
-		else if(flag=='s')
-			para.innerHTML=data.message+"<span style='color:#6497b1;'></b> :"+data.to+"</b></span>";
-		else
-			para.innerHTML=data;
-		para.style.padding="0";
-		para.style.margin="0.5em";
-		Div_1.appendChild(para);
-		var element = document.getElementById("chatArea");
-		element.appendChild(Div_1);
-		element.scrollTop = element.scrollHeight;
-	}
-
-	$(".subHeadings").click(function(){
-		$(".subHeadings").removeClass("active");
-		$(this).addClass("active");
-		$("[name='displayArea']").css("display","none");
-		$("#"+$(this).html()).css("display","block");
-		$("#changeName").html($(this).html().toUpperCase());
-	});
 </script>
 
 </html>

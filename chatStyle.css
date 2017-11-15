@@ -1,0 +1,126 @@
+.sendMessageStyle {
+    max-width: 70%; 
+    clear:both;
+    word-wrap: break-word;
+    font-size: 1em;
+    margin:0.5em;
+    font-family: 'Ubuntu', sans-serif;
+    float:right;
+    color:white;
+    background-color: rgba(64,60,56,0.6);
+    border-width: 0 5px 0 0;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: transparent #ff4040 transparent transparent ;
+}
+
+.serverMessageStyle{
+    font-size: 0.2em;
+    margin:0 auto;
+    font-family: 'Press Start 2P', cursive;
+    color:#99cc33;
+    border-width: 0px 0px 5px 0px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: transparent transparent #99cc33 ;
+    background:rgba(0,0,0,0); 
+    z-index:1;
+    position: fixed;
+    bottom: 0;
+    left:5px;
+}
+
+.receiveMessageStyle {
+    width: 70%; 
+    word-wrap: break-word;
+    font-size: 1em;
+    margin:0.5em;
+    clear:both;
+    font-family: 'Ubuntu', sans-serif;
+    float:left;
+    color:white;
+    background-color: rgba(25,25,23,0.6);
+    border-width: 0 0 0 5px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: transparent transparent transparent #ffad60;
+}
+
+
+
+.noBorder{
+	border:0px;
+	opacity:0.5;
+}
+
+.fullHeightDiv{
+	height: 100vh;
+	background-color: rgba(0,0,0,0.6);
+}
+
+.headingStyle{
+	text-align:right;
+	color:white;
+	font-family: 'Audiowide', cursive;
+}
+
+.subHeadingStyle{
+	text-align:center;
+	color:white;
+	margin-top:4em;
+}
+
+.subHeadings{
+	margin-bottom:0.4em;
+	padding: 0.3em;
+	font-family: 'Special Elite', cursive;
+	font-size:1.4em;
+	cursor:pointer;
+}
+.onlineUsers{
+	text-align:right;
+	margin-top:0.7em;
+	font-family: 'Press Start 2P', cursive;
+}
+
+body {
+    background-image: url("back.jpg");
+}
+
+#changeName{
+	text-align:left;
+	color:white;
+	font-family: 'Audiowide', cursive;
+	cursor:pointer;
+}
+
+.area{
+	background:rgba(0,102,204);
+	background: -webkit-linear-gradient(right,rgba(0,102,204,0.9),rgba(0,102,204,0)); /*Safari 5.1-6*/
+	background: -o-linear-gradient(right,rgba(0,102,204,0.9),rgba(0,102,204,0)); /*Opera 11.1-12*/
+	background: -moz-linear-gradient(right,rgba(0,102,204,0.9),rgba(0,102,204,0)); /*Fx 3.6-15*/
+	background: linear-gradient(to right,rgba(0,102,204,0.9) , rgba(0,102,204,0));
+	height: 100vh;
+}
+
+.active{
+	color:#4e4845;  
+}
+
+::-webkit-scrollbar
+{
+  width: 0.6em;  /* for vertical scrollbars */
+  height: 0.3em; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
