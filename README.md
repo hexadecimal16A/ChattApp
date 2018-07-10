@@ -22,5 +22,6 @@
 	<li> start chatting.</li>
 </ol>
 <hr>
-<b>Website</b>Direct use below website and follow the above instruction to chat.
+<b><h4>Website</h4></b>
+Direct use below website and follow the above instruction to chat.<br>
 http://hexchat.herokuapp.com/
