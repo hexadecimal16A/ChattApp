@@ -1,19 +1,24 @@
-Requirements--
-	install nodejs
-	install express
-	install socket
-
-Run--
-	cd "to the project folder"
-	nodejs chatServer.js
-	browser : localhost:8000
-
-Instructions--
-	1. on the home page click on "HEX"
-	2. edit it to desired_name
-	3. click on heading "CHAT" to get online
-	4. All Online users will be displayed under "Users"
-	5. select a name under users
-	6. start chatting.
-
+<h4><b>Requirements--</b></h4>
+<ul>
+	<li>install nodejs</li>
+	<li>install express</li>
+	<li>install socket</li>
+</ul>
+<br>
+<h4><b>Run--</b></h4>
+<ul>
+	<li>cd "to the project folder".</li>
+	<li>nodejs chatServer.js </li>
+	<li>browser : localhost:8000 </li>
+</ul>
+<br>
+<h4><b>Instructions--</b></h4>
+<ol>
+	<li> on the home page click on "HEX". </li>
+	<li> edit it to desired_name. </li>
+	<li> click on heading "CHAT" to get online. </li>
+	<li> All Online users will be displayed under "Users". </li>
+	<li> select a name under users. </li>
+	<li> start chatting.</li>
+</ol>
 
