@@ -4,14 +4,14 @@
 	<li>install express</li>
 	<li>install socket</li>
 </ul>
-<br>
+<hr>
 <h4><b>Run--</b></h4>
 <ul>
 	<li>cd "to the project folder".</li>
 	<li>nodejs chatServer.js </li>
 	<li>browser : localhost:8000 </li>
 </ul>
-<br>
+<hr>
 <h4><b>Instructions--</b></h4>
 <ol>
 	<li> on the home page click on "HEX". </li>
@@ -21,4 +21,6 @@
 	<li> select a name under users. </li>
 	<li> start chatting.</li>
 </ol>
-
+<hr>
+<b>Website</b>Direct use below website and follow the above instruction to chat.
+http://hexchat.herokuapp.com/
